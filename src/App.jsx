@@ -44,7 +44,10 @@ export default function App() {
   }
 
   function handleSelection(friend) {
-    setSelectedFriend(friend);
+    setSelectedFriend(selectedFriend =>
+      selectedFriend?.id === friend.id ? null : friend,
+    );
+    setShowAddFriend(false);
   }
 
   return (
@@ -88,7 +91,7 @@ function FriendsList({ friends, onSelection, selectedFriend }) {
 }
 
 function Friend({ friend, onSelection, selectedFriend }) {
-  const isSelected = friend === selectedFriend;
+  const isSelected = selectedFriend?.id === friend.id;
 
   return (
     <li className={isSelected ? 'selected' : ''}>
